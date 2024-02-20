@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blend Dashboard</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="css/nunito-font.css">
+
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="robots" content="noindex, follow">
+
+  <script nonce="483aec23-5e9b-4fd5-b60f-b76c3d397297">
+    try {
+        (function (w, d) {
+            !function (j, k, l, m) {
+                j[l] = j[l] || {};
+                j[l].executed = [];
+                j.zaraz = { deferred: [], listeners: [] };
+                j.zaraz.q = [];
+                j.zaraz._f = function (n) {
+                    return async function () {
+                        var o = Array.prototype.slice.call(arguments);
+                        j.zaraz.q.push({ m: n, a: o });
+                    };
+                };
+
+                // Initialization function
+                j.zaraz.init = () => {
+                    // ... (Initialization logic)
+                };
+
+                // Expose some functions like 'track', 'set', 'debug'
+                for (const p of ["track", "set", "debug"])
+                    j.zaraz[p] = j.zaraz._f(p);
+
+                // Check if the document is ready, then initialize
+                ["complete", "interactive"].includes(k.readyState)
+                    ? zaraz.init()
+                    : j.addEventListener("DOMContentLoaded", zaraz.init);
+            }(w, d, "zarazData", "script");
+        })(window, document);
+    } catch (e) {
+        // In case of an error, fetch some resource ("/cdn-cgi/zaraz/t") and throw the error
+        throw fetch("/cdn-cgi/zaraz/t"), e;
+    };
+</script>
+
+</head>
+
+<body class="form-v9">
+  <div class="page-content">
+    <div class="form-v9-content" style="background-image: url('images/bio.jpg')">
+      <div id="result" class="result"></div>
+      <form id="blendForm" class="form-detail" method="get">
+        <!-- action="http://127.0.0.1:8000/blend-dashboard" method="POST" -->
+        <h2>Biofuel Requirements Validity</h2>
+        <div class="form-row-total">
+          <div class="form-row">
+            <input type="number" step="0.01" id="density" name="Density" class="input-text" placeholder="Density" required>
+          </div>
+          <div class="form-row">
+            <input type="number" step="0.01" id="viscosity" name="Viscosity" class="input-text" placeholder="Viscosity" required>
+          </div>
+        </div>
+        <div class="form-row-total">
+          <div class="form-row">
+            <input type="number" step="0.01" id="flash" name="Flash_Point" class="input-text" placeholder="Flash Point" required>
+          </div>
+          <div class="form-row">
+            <input type="number" step="0.01" id="heating" name="Heating_Value" class="input-text" placeholder="Heating Value"
+              required>
+          </div>
+        </div>
+        <div class="form-row-last">
+          <input type="submit" name="check-biofuel" class="check-biofuel" value="Check Biofuel"  onclick="submitForm()">
+
+        </div>
+      </form>
+    </div>
+      
+  </div>
+
+
+
+  <script>
+    async function submitForm() {
+      console.log("Work reach here1");
+      var densityinput = document.getElementById('density').value;
+      var viscosityinput = document.getElementById('viscosity').value;
+      var flash_Pointinput = document.getElementById('flash').value;
+      var heatinginput = document.getElementById('heating').value;
+      document.querySelector("form.form-detail").addEventListener('submit', async function (e){
+        e.preventDefault();
+        console.log("Work reach nameimput");
+
+        var apiURL = `http://127.0.0.1:8000/blend-dashboard?Density=${densityinput}&Viscosity=${viscosityinput}&Flash_Point=${flash_Pointinput}&Heating_Value=${heatinginput}`;
+ 
+        const response = await fetch(apiURL, {
+        method: 'GET'
+      });
+      
+      const responseData = await response.json();
+      
+
+      const resultElement = document.getElementById('result');
+
+      resultElement.className = 'result';
+
+      // // Apply new styles based  on the response
+      if (responseData.includes("meets the requirements")) {
+        resultElement.classList.add('sucess');
+      } else {
+        resultElement.classList.add('error');
+      }
+
+      resultElement.innerText = responseData;
+
+      
+      })
+     
+    }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
+  <script>
+    //   window.dataLayer = window.dataLayer || [];
+    //   function gtag() { dataLayer.push(arguments); }
+    //   gtag('js', new Date());
+
+    //   gtag('config', 'UA-23581568-13');
+    // </script>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
+    // integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" //
+    data-cf-beacon='{"rayId":"856300b0df75b956","version":"2024.2.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' //
+    crossorigin="anonymous">
+      // </script>
+
+</body>
+
+</html>
+
+
