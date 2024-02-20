@@ -4,15 +4,6 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI() 
 
-
-
-# Mount the "frontend" directory as "/static"
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
-
-# Define other routes and API endpoints here...
-
-
-
 app.add_middleware(
    CORSMiddleware,
    allow_origins=['*'],
@@ -20,6 +11,10 @@ app.add_middleware(
    allow_methods=["*"],
    allow_headers=["*"],
 )
+
+# Mount the "frontend" directory as "/static"
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
 
 
 parameters = ["Density", "Viscosity", "Flash Point", "Heating Value"]
