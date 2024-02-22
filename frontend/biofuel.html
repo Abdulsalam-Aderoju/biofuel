@@ -97,7 +97,7 @@
         e.preventDefault();
         console.log("Work reach nameimput");
 
-        var apiURL = `https://biofuel-validation.onrender.com/blend-dashboard?Density=${densityinput}&Viscosity=${viscosityinput}&Flash_Point=${flash_Pointinput}&Heating_Value=${heatinginput}`;
+        var apiURL = `https://biofuel-validation.onrender.com/blend-dashboard`;
  
         const response = await fetch(apiURL, {
         method: 'GET'
