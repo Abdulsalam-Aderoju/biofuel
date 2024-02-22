@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
 app = FastAPI() 
 
@@ -12,8 +11,7 @@ app.add_middleware(
    allow_headers=["*"],
 )
 
-# Mount the "frontend" directory as "/static"
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
 
 
 
