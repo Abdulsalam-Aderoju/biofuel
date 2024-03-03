@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+from corsics import CORS
 
 app = FastAPI() 
 
@@ -13,8 +13,16 @@ app.add_middleware(
 )
 
 
-# Mount the "frontend" directory as "/static"
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+
+# Allow requests from your frontend's origin
+origins = ["https://abdulsalam-aderoju.github.io/Biofuel-Frontend/"]
+
+app.add_middleware(
+    CORS, allow_origins=origins, allow_methods=["*"], allow_headers=["*"]
+)
+
+
 
 
 
