@@ -81,7 +81,7 @@
             const form = document.getElementById('blendForm');
             const formData = new FormData(form);
 
-            const response = await fetch('http://127.0.0.1:8000', {
+            const response = await fetch('https://biofuel-validation.onrender.com', {
                 method: 'POST',
                 body: formData
             });
