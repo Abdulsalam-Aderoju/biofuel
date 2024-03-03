@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from corsics import CORS
+
 
 app = FastAPI() 
 
@@ -18,11 +18,14 @@ app.add_middleware(
 # Allow requests from your frontend's origin
 origins = ["https://abdulsalam-aderoju.github.io/Biofuel-Frontend/"]
 
+
 app.add_middleware(
-    CORS, allow_origins=origins, allow_methods=["*"], allow_headers=["*"]
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-
-
 
 
 
