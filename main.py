@@ -13,23 +13,6 @@ app.add_middleware(
 )
 
 
-
-
-# Allow requests from your frontend's origin
-origins = ["https://abdulsalam-aderoju.github.io/Biofuel-Frontend/"]
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-
-
 parameters = ["Density", "Viscosity", "Flash Point", "Heating Value"]
 
 @app.get("/blend-dashboard")
